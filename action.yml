@@ -15,8 +15,9 @@ runs:
     - name: Set up custom git config
       shell: bash
       run: |
+        git config --global core.compression 0
         git config --global http.postBuffer 1048576000
-        git config --global http.lowSpeedLimit 0
+        git config --global http.lowSpeedLimit 512000
         git config --global http.lowSpeedTime 600
         git config --global core.packedGitLimit 2024m
         git config --global core.packedGitWindowSize 2024m
@@ -24,7 +25,17 @@ runs:
         git config --global pack.packSizeLimit 2047m 
         git config --global pack.windowMemory 2047m
 
+    - name: Show config before checkout
+      shell: bash
+      run: |
+        git config --global --list
+
     - name: Check out source code
       uses: actions/checkout@v4
       with:
         fetch-depth: ${{ inputs.fetch-depth }}
+
+    - name: Show config after checkout
+      shell: bash
+      run: |
+        git config --global --list
