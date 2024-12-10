@@ -8,6 +8,9 @@ inputs:
     required: false
     default: 1
 
+  ssh-key:
+    required: false
+
 runs:
   using: composite
 
@@ -34,6 +37,7 @@ runs:
       uses: actions/checkout@v4
       with:
         fetch-depth: ${{ inputs.fetch-depth }}
+        ssh-key: ${{ inputs.ssh-key }}
 
     - name: Show config after checkout
       shell: bash
