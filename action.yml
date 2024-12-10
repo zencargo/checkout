@@ -16,6 +16,8 @@ runs:
       shell: bash
       run: |
         git config --global http.postBuffer 1048576000
+        git config --global http.lowSpeedLimit 0
+        git config --global http.lowSpeedTime 600
         git config --global core.packedGitLimit 2024m
         git config --global core.packedGitWindowSize 2024m
         git config --global pack.deltaCacheSize 2047m 
